@@ -1,0 +1,14 @@
+{
+ "users": {
+  "l23141210@queretaro.tecnm.mx": {
+   "nombre": "jesus",
+   "telefono": "4421600426",
+   "salt": "66d3b93dab332122562bdd5727f79822",
+   "pass": "310721a300e7213a987bf73f373dcefd6884c318c95d4a142b5082caabc80a3d",
+   "creado": "2026-11-11T19:43:16.882Z"
+  }
+ },
+ "tokens": {
+  "f89b8622e66482e9e58c85464b0259f75dbf6ab606fe66ac": "l23141210@queretaro.tecnm.mx"
+ }
+}

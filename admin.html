@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Administración | Santa Mónica</title>
+  <link rel="icon" href="img/logo-santa-monica.jpg.jpeg">
+  <style>
+    :root { --negro:#171717; --naranja:#ef874c; --gris:#6b6b6b; --borde:#e3e0da; --fondo:#f6f4f0; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, sans-serif; background: var(--fondo); color: var(--negro); }
+    header { background: var(--negro); color: #fff; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; }
+    header h1 { font-size: 18px; margin: 0; }
+    main { max-width: 1100px; margin: 24px auto; padding: 0 18px; display: grid; gap: 20px; }
+    .card { background: #fff; border: 1px solid var(--borde); padding: 20px; }
+    h2 { font-size: 16px; margin: 0 0 14px; }
+    .login { max-width: 360px; margin: 12vh auto; }
+    label { display: grid; gap: 5px; font-size: 12px; color: var(--gris); }
+    input, select { padding: 10px; border: 1px solid var(--borde); font: inherit; }
+    button { cursor: pointer; border: 0; padding: 10px 16px; font: inherit; font-size: 13px; background: var(--negro); color: #fff; }
+    button.sec { background: none; color: var(--negro); border: 1px solid var(--negro); }
+    button.naranja { background: var(--naranja); color: var(--negro); font-weight: 700; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .stat b { display: block; font-size: 26px; }
+    .stat span { font-size: 12px; color: var(--gris); }
+    .form { display: grid; grid-template-columns: 2fr 1fr 1.5fr auto; gap: 12px; align-items: end; }
+    .tabla { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--borde); vertical-align: middle; }
+    th { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--gris); }
+    .pill { padding: 3px 10px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+    .pill.pagada { background: #d9f2e0; color: #14602b; }
+    .pill.pendiente { background: #fff0d6; color: #8a5a00; }
+    .acciones { display: flex; gap: 6px; flex-wrap: wrap; }
+    .acciones button, .acciones a { padding: 6px 10px; font-size: 12px; }
+    .acciones a { border: 1px solid var(--negro); color: var(--negro); text-decoration: none; }
+    .linkbox { margin-top: 14px; padding: 12px; background: var(--fondo); font-size: 13px; word-break: break-all; }
+    .error { color: #c0392b; font-size: 13px; margin-top: 10px; }
+    .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .top h2 { margin: 0; }
+    [hidden] { display: none !important; }
+    @media (max-width: 800px) { .form, .grid3 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <div class="card login" id="login">
+    <h2>Administración Santa Mónica</h2>
+    <form id="loginForm">
+      <label>Clave de administrador
+        <input type="password" id="claveInput" required autocomplete="current-password">
+      </label>
+      <button class="naranja" type="submit" style="margin-top:14px;width:100%">ENTRAR</button>
+    </form>
+    <p class="error" id="loginErr"></p>
+  </div>
+
+  <div id="panel" hidden>
+    <header>
+      <h1>Administración · Santa Mónica</h1>
+      <button class="sec" id="salir" style="color:#fff;border-color:#fff">Salir</button>
+    </header>
+
+    <main>
+      <section class="grid3">
+        <div class="card stat"><b id="sCobrado">$0.00</b><span>Total cobrado</span></div>
+        <div class="card stat"><b id="sPagadas">0</b><span>Pedidos pagados</span></div>
+        <div class="card stat"><b id="sPend">0</b><span>Pedidos pendientes</span></div>
+      </section>
+
+      <section class="card">
+        <h2>Crear pedido y enlace de pago</h2>
+        <form class="form" id="nuevoForm">
+          <label>Concepto<input id="fConcepto" required placeholder="Ej. Anticipo lápida SM-7K3Q9"></label>
+          <label>Monto (MXN)<input id="fMonto" type="number" min="10" step="0.01" required></label>
+          <label>Cliente<input id="fCliente" placeholder="Nombre del cliente"></label>
+          <button class="naranja" type="submit">CREAR</button>
+        </form>
+        <div class="linkbox" id="linkBox" hidden>
+          <div id="linkTxt"></div>
+          <div class="acciones" style="margin-top:8px">
+            <button type="button" id="copiarNuevo">Copiar enlace</button>
+            <button type="button" class="sec" id="waNuevo">Enviar por WhatsApp</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="top">
+          <h2>Pedidos</h2>
+          <select id="filtro">
+            <option value="todas">Todos</option>
+            <option value="pagada">Pagados</option>
+            <option value="pendiente">Pendientes</option>
+          </select>
+        </div>
+        <div class="tabla">
+          <table>
+            <thead>
+              <tr><th>Folio</th><th>Fecha</th><th>Cliente</th><th>Concepto</th><th>Monto</th><th>Estado</th><th>Acciones</th></tr>
+            </thead>
+            <tbody id="filas"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const mxn = (n) => n.toLocaleString("es-MX", { style: "currency", currency: "MXN" });
+    const enlace = (id) => location.origin + "/pagar.html?orden=" + id;
+    let clave = sessionStorage.getItem("sm_admin") || "";
+    let ordenes = [], filtro = "todas", timer, ultimoLink = "";
+
+    async function api(ruta, opts = {}) {
+      const r = await fetch("/api/pagos/" + ruta, {
+        ...opts,
+        headers: { "Content-Type": "application/json", "x-admin-key": clave }
+      });
+      let d = {};
+      try { d = await r.json(); } catch {}
+      return { ok: r.ok, status: r.status, d };
+    }
+
+    async function copiar(txt) {
+      try { await navigator.clipboard.writeText(txt); alert("Enlace copiado"); }
+      catch { prompt("Copia este enlace:", txt); }
+    }
+
+    async function entrar(k) {
+      clave = k;
+      const { ok, status, d } = await api("admin/ordenes");
+      if (!ok) {
+        clave = ""; sessionStorage.removeItem("sm_admin");
+        $("loginErr").textContent = status === 401 ? "Clave incorrecta." : "No se pudo conectar con el servidor.";
+        return;
+      }
+      sessionStorage.setItem("sm_admin", k);
+      $("login").hidden = true; $("panel").hidden = false;
+      ordenes = d; pintar();
+      clearInterval(timer); timer = setInterval(refrescar, 15000);
+    }
+
+    async function refrescar() {
+      const { ok, d } = await api("admin/ordenes");
+      if (ok) { ordenes = d; pintar(); }
+    }
+
+    async function borrar(id) {
+      if (!confirm("¿Borrar el pedido " + id + "?\n\nSi el cliente ya generó una ficha de OXXO y la va a pagar, NO lo borres.")) return;
+      const { ok, d } = await api("admin/ordenes/" + id, { method: "DELETE" });
+      if (!ok) { alert(d.error || "No se pudo borrar"); return; }
+      refrescar();
+    }
+
+    function pintar() {
+      const pagadas = ordenes.filter((o) => o.estado === "pagada");
+      $("sCobrado").textContent = mxn(pagadas.reduce((s, o) => s + o.monto, 0));
+      $("sPagadas").textContent = pagadas.length;
+      $("sPend").textContent = ordenes.length - pagadas.length;
+
+      const filas = $("filas");
+      filas.replaceChildren();
+      const lista = ordenes.filter((o) => filtro === "todas" || o.estado === filtro);
+      if (!lista.length) {
+        const c = filas.insertRow().insertCell();
+        c.colSpan = 7; c.textContent = "No hay pedidos.";
+        return;
+      }
+
+      lista.forEach((o) => {
+        const tr = filas.insertRow();
+        tr.insertCell().textContent = o.id;
+        tr.insertCell().textContent = new Date(o.pagadoEn || o.creada).toLocaleString("es-MX", { dateStyle: "short", timeStyle: "short" });
+        tr.insertCell().textContent = o.cliente || "-";
+
+        const cc = tr.insertCell();
+        cc.textContent = o.concepto;
+        if (o.lineas) {
+          const s = document.createElement("div");
+          s.style.cssText = "color:#6b6b6b;font-size:12px";
+          s.textContent = o.lineas.map((l) => `${l.cantidad}× ${l.id}`).join(", ");
+          cc.appendChild(s);
+        }
+
+        tr.insertCell().textContent = mxn(o.monto);
+
+        const pill = document.createElement("span");
+        pill.className = "pill " + o.estado;
+        pill.textContent = o.estado === "pagada"
+          ? "Pagado" + (o.metodo === "oxxo" ? " · OXXO" : o.metodo ? " · Tarjeta" : "")
+          : "Pendiente";
+        tr.insertCell().appendChild(pill);
+
+        const box = document.createElement("div");
+        box.className = "acciones";
+        tr.insertCell().appendChild(box);
+        const btn = (txt, fn) => {
+          const b = document.createElement("button");
+          b.type = "button"; b.className = "sec"; b.textContent = txt; b.onclick = fn;
+          box.appendChild(b);
+        };
+        btn("Copiar enlace", () => copiar(enlace(o.id)));
+        if (o.estado === "pagada") {
+          const a = document.createElement("a");
+          a.href = "/api/pagos/comprobante/" + o.id; a.target = "_blank"; a.textContent = "PDF";
+          box.appendChild(a);
+        } else {
+          btn("Borrar", () => borrar(o.id));
+        }
+      });
+    }
+
+    $("loginForm").addEventListener("submit", (e) => { e.preventDefault(); $("loginErr").textContent = ""; entrar($("claveInput").value.trim()); });
+    $("salir").addEventListener("click", () => { sessionStorage.removeItem("sm_admin"); location.reload(); });
+    $("filtro").addEventListener("change", (e) => { filtro = e.target.value; pintar(); });
+
+    $("nuevoForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const { ok, d } = await api("ordenes", {
+        method: "POST",
+        body: JSON.stringify({ concepto: $("fConcepto").value.trim(), monto: Number($("fMonto").value), cliente: $("fCliente").value.trim() })
+      });
+      if (!ok) { alert(d.error || "No se pudo crear el pedido"); return; }
+      ultimoLink = enlace(d.id);
+      $("linkTxt").textContent = ultimoLink;
+      $("linkBox").hidden = false;
+      e.target.reset();
+      refrescar();
+    });
+    $("copiarNuevo").addEventListener("click", () => copiar(ultimoLink));
+    $("waNuevo").addEventListener("click", () =>
+      window.open("https://wa.me/?text=" + encodeURIComponent("Hola, este es el enlace para pagar tu pedido: " + ultimoLink), "_blank", "noopener"));
+
+    if (clave) entrar(clave);
+  </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagar | Santa Mónica</title>
+  <link rel="icon" href="img/logo-santa-monica.jpg.jpeg">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .pay { max-width: 460px; margin: 12vh auto; padding: 36px 28px; text-align: center; border: 1px solid var(--border); }
+    .pay h1 { font-size: 26px; margin-bottom: 20px; }
+    .pay .concepto { color: var(--gray); }
+    .pay .monto { font-size: 38px; font-weight: 700; margin: 8px 0 22px; }
+    .pay p { margin-bottom: 14px; font-size: 14px; }
+    .pay .button, .pay button { border: 0; cursor: pointer; justify-content: center; }
+  </style>
+</head>
+<body>
+  <main class="pay">
+    <h1>Pago de tu pedido</h1>
+    <div id="estado">Cargando…</div>
+    <p style="margin-top:24px"><a href="index.html">← Volver al sitio</a></p>
+  </main>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const id = params.get("orden"), volvio = params.get("ok");
+        if (volvio) localStorage.removeItem("sm_cart");
+    const box = document.getElementById("estado");
+    const mxn = (n) => n.toLocaleString("es-MX", { style: "currency", currency: "MXN" });
+
+    function pintar(o) {
+      box.replaceChildren();
+      const h = (tag, txt, cls) => { const e = document.createElement(tag); e.textContent = txt; if (cls) e.className = cls; box.appendChild(e); return e; };
+      h("p", o.concepto, "concepto");
+      h("p", mxn(o.monto), "monto");
+      h("p", "Folio: " + o.id + " (guárdalo para consultar tu comprobante después)", "concepto");
+      if (o.estado === "pagada") {
+        h("p", "✅ Pago recibido. ¡Gracias!");
+        const a = h("a", "DESCARGAR COMPROBANTE (PDF)", "button");
+        a.href = "/api/pagos/comprobante/" + o.id; a.target = "_blank";
+        return;
+      }
+      if (volvio) h("p", "Si elegiste OXXO, paga con tu ficha en tienda. Cuando se confirme el pago, tu comprobante aparecerá aquí (puede tardar hasta 1 día hábil).");
+      const b = h("button", "PAGAR CON TARJETA U OXXO", "button");
+      b.onclick = async () => {
+        b.disabled = true;
+        const r = await fetch("/api/pagos/checkout", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ orden: o.id }) });
+        const d = await r.json();
+        if (d.url) location.href = d.url; else { b.disabled = false; alert(d.error || "No se pudo iniciar el pago"); }
+      };
+    }
+
+    async function cargar() {
+      const r = await fetch("/api/pagos/ordenes/" + encodeURIComponent(id || ""));
+      if (!r.ok) { box.textContent = "No encontramos este pedido."; return; }
+      const o = await r.json();
+      pintar(o);
+      if (o.estado !== "pagada" && volvio) setTimeout(cargar, 8000);
+    }
+    cargar();
+  </script>
+</body>
+</html>

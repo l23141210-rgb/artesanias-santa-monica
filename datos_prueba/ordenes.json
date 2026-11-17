@@ -1,0 +1,320 @@
+{
+ "ORD-305479F634B7": {
+  "id": "ORD-305479F634B7",
+  "concepto": "Anticipo lapida SM-7K3Q9",
+  "monto": 2500,
+  "cliente": "Ana Lopez",
+  "estado": "pendiente",
+  "creada": "2026-11-11T07:32:20.626Z"
+ },
+ "ORD-13301690AA3F": {
+  "id": "ORD-13301690AA3F",
+  "concepto": "Pedido de 2 diseño(s)",
+  "lineas": [
+   {
+    "id": "SM-TZZFB",
+    "nombre": "Lápida 03",
+    "precio": 3500,
+    "cantidad": 1
+   },
+   {
+    "id": "SM-P9NPS",
+    "nombre": "Lápida 02",
+    "precio": 3500,
+    "cantidad": 1
+   }
+  ],
+  "monto": 7000,
+  "cliente": "",
+  "estado": "pendiente",
+  "creada": "2026-11-11T16:08:00.988Z"
+ },
+ "ORD-F47CA4C0F827": {
+  "id": "ORD-F47CA4C0F827",
+  "concepto": "Pedido de 3 diseño(s)",
+  "lineas": [
+   {
+    "id": "SM-GM5GN",
+    "nombre": "Lápida 06",
+    "precio": 3500,
+    "cantidad": 1
+   },
+   {
+    "id": "SM-ZQL44",
+    "nombre": "Lápida 09",
+    "precio": 3500,
+    "cantidad": 1
+   },
+   {
+    "id": "SM-3T2EH",
+    "nombre": "Escalera 02",
+    "precio": 1800,
+    "cantidad": 1
+   }
+  ],
+  "monto": 8800,
+  "cliente": "",
+  "estado": "pendiente",
+  "creada": "2026-11-11T16:08:40.175Z"
+ },
+ "ORD-535CD71EB919": {
+  "id": "ORD-535CD71EB919",
+  "concepto": "Pedido de 3 diseño(s)",
+  "lineas": [
+   {
+    "id": "SM-JNA2B",
+    "nombre": "Florero 02",
+    "precio": 800,
+    "cantidad": 1
+   },
+   {
+    "id": "SM-METYC",
+    "nombre": "Lavabo 01",
+    "precio": 2200,
+    "cantidad": 1
+   },
+   {
+    "id": "SM-SNY2B",
+    "nombre": "Florero 01",
+    "precio": 800,
+    "cantidad": 1
+   }
+  ],
+  "monto": 3800,
+  "cliente": "",
+  "estado": "pendiente",
+  "creada": "2026-11-11T16:12:59.263Z"
+ },
+ "ORD-01B9ABAB83B1": {
+  "id": "ORD-01B9ABAB83B1",
+  "concepto": "Pedido de 3 diseño(s)",
+  "lineas": [
+   {
+    "id": "SM-JNA2B",
+    "nombre": "Florero 02",
+    "precio": 800,
+    "cantidad": 1
+   },
+   {
+    "id": "SM-METYC",
+    "nombre": "Lavabo 01",
+    "precio": 2200,
+    "cantidad": 1
+   },
+   {
+    "id": "SM-SNY2B",
+    "nombre": "Florero 01",
+    "precio": 800,
+    "cantidad": 1
+   }
+  ],
+  "monto": 3800,
+  "cliente": "",
+  "estado": "pendiente",
+  "creada": "2026-11-11T18:14:51.811Z"
+ },
+ "ORD-1417ADFF85AD": {
+  "id": "ORD-1417ADFF85AD",
+  "concepto": "Pedido de 3 diseño(s)",
+  "lineas": [
+   {
+    "id": "SM-TZZFB",
+    "nombre": "Lápida 03",
+    "precio": 3500,
+    "cantidad": 1
+   },
+   {
+    "id": "SM-P9NPS",
+    "nombre": "Lápida 02",
+    "precio": 3500,
+    "cantidad": 1
+   },
+   {
+    "id": "SM-CCL8U",
+    "nombre": "Lápida 01",
+    "precio": 3500,
+    "cantidad": 1
+   }
+  ],
+  "monto": 10500,
+  "cliente": "",
+  "estado": "pendiente",
+  "creada": "2026-11-11T19:37:10.417Z"
+ },
+ "ORD-36E4F45607B0": {
+  "id": "ORD-36E4F45607B0",
+  "concepto": "Pedido de 3 diseño(s)",
+  "lineas": [
+   {
+    "id": "SM-TZZFB",
+    "nombre": "Lápida 03",
+    "precio": 3500,
+    "cantidad": 2
+   },
+   {
+    "id": "SM-P9NPS",
+    "nombre": "Lápida 02",
+    "precio": 3500,
+    "cantidad": 2
+   },
+   {
+    "id": "SM-CCL8U",
+    "nombre": "Lápida 01",
+    "precio": 3500,
+    "cantidad": 1
+   }
+  ],
+  "monto": 17500,
+  "cliente": "jesus",
+  "estado": "pendiente",
+  "creada": "2026-11-11T20:34:07.191Z"
+ },
+ "ORD-D88A92A5EDA2": {
+  "id": "ORD-D88A92A5EDA2",
+  "concepto": "Pedido de 3 diseño(s)",
+  "lineas": [
+   {
+    "id": "SM-TZZFB",
+    "nombre": "Lápida 03",
+    "precio": 3500,
+    "cantidad": 2
+   },
+   {
+    "id": "SM-P9NPS",
+    "nombre": "Lápida 02",
+    "precio": 3500,
+    "cantidad": 2
+   },
+   {
+    "id": "SM-CCL8U",
+    "nombre": "Lápida 01",
+    "precio": 3500,
+    "cantidad": 1
+   }
+  ],
+  "monto": 17500,
+  "cliente": "jesus",
+  "estado": "pendiente",
+  "creada": "2026-11-16T22:30:23.717Z"
+ },
+ "ORD-B31D9429B1FC": {
+  "id": "ORD-B31D9429B1FC",
+  "concepto": "Pedido de 3 diseño(s)",
+  "lineas": [
+   {
+    "id": "SM-JNA2B",
+    "nombre": "Florero 02",
+    "precio": 800,
+    "cantidad": 1
+   },
+   {
+    "id": "SM-METYC",
+    "nombre": "Lavabo 01",
+    "precio": 2200,
+    "cantidad": 1
+   },
+   {
+    "id": "SM-SNY2B",
+    "nombre": "Florero 01",
+    "precio": 800,
+    "cantidad": 1
+   }
+  ],
+  "monto": 3800,
+  "cliente": "jesus",
+  "estado": "pendiente",
+  "creada": "2026-11-17T06:21:07.389Z"
+ },
+ "ORD-339FFB415BF6": {
+  "id": "ORD-339FFB415BF6",
+  "concepto": "Pedido de 3 diseño(s)",
+  "lineas": [
+   {
+    "id": "SM-CCL8U",
+    "nombre": "Lápida 01",
+    "precio": 3500,
+    "cantidad": 1
+   },
+   {
+    "id": "SM-P9NPS",
+    "nombre": "Lápida 02",
+    "precio": 3500,
+    "cantidad": 1
+   },
+   {
+    "id": "SM-TZZFB",
+    "nombre": "Lápida 03",
+    "precio": 3500,
+    "cantidad": 1
+   }
+  ],
+  "monto": 10500,
+  "cliente": "jesus",
+  "estado": "pendiente",
+  "creada": "2026-11-17T06:24:27.622Z"
+ },
+ "ORD-23F7C48EAE33": {
+  "id": "ORD-23F7C48EAE33",
+  "concepto": "Pedido de 1 diseño(s)",
+  "lineas": [
+   {
+    "id": "SM-JNA2B",
+    "nombre": "Florero 02",
+    "precio": 800,
+    "cantidad": 1
+   }
+  ],
+  "monto": 800,
+  "cliente": "jesus",
+  "estado": "pendiente",
+  "creada": "2026-11-17T06:28:59.468Z"
+ },
+ "ORD-4E5F1A3D8F3E": {
+  "id": "ORD-4E5F1A3D8F3E",
+  "concepto": "Pedido de 1 diseño(s)",
+  "lineas": [
+   {
+    "id": "SM-JNA2B",
+    "nombre": "Florero 02",
+    "precio": 800,
+    "cantidad": 1
+   }
+  ],
+  "monto": 800,
+  "cliente": "",
+  "estado": "pendiente",
+  "creada": "2026-11-17T06:34:36.676Z"
+ },
+ "ORD-77465041C137": {
+  "id": "ORD-77465041C137",
+  "concepto": "Pedido de 1 diseño(s)",
+  "lineas": [
+   {
+    "id": "SM-FRHWK",
+    "nombre": "Lápida 05",
+    "precio": 3500,
+    "cantidad": 1
+   }
+  ],
+  "monto": 3500,
+  "cliente": "",
+  "estado": "pendiente",
+  "creada": "2026-11-17T06:44:58.204Z"
+ },
+ "ORD-1BA5A884C69D": {
+  "id": "ORD-1BA5A884C69D",
+  "concepto": "Pedido de 1 diseño(s)",
+  "lineas": [
+   {
+    "id": "SM-P9NPS",
+    "nombre": "Lápida 02",
+    "precio": 3500,
+    "cantidad": 1
+   }
+  ],
+  "monto": 3500,
+  "cliente": "",
+  "estado": "pendiente",
+  "creada": "2026-11-17T07:20:36.280Z"
+ }
+}

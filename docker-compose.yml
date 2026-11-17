@@ -1,0 +1,43 @@
+services:
+  web:
+    build: .
+    image: santa-monica-web
+    container_name: santa-monica-web
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+      - pagos
+    restart: unless-stopped
+
+  api:
+    build: ./api
+    image: santa-monica-api
+    container_name: santa-monica-api
+    volumes:
+      - usuarios:/data
+    restart: unless-stopped
+
+  pagos:
+    build: ./pagos
+    image: santa-monica-pagos
+    container_name: santa-monica-pagos
+    env_file: .env
+    volumes:
+      - pagos-data:/data
+      - ./catalogo.js:/app/catalogo.js:ro
+    restart: unless-stopped
+
+  stripe-cli:
+    image: stripe/stripe-cli
+    container_name: santa-monica-stripe
+    profiles: ["test"]
+    environment:
+      STRIPE_API_KEY: ${STRIPE_SECRET_KEY}
+    command: listen --forward-to http://web:80/api/pagos/webhook
+    depends_on:
+      - web
+
+volumes:
+  usuarios:
+  pagos-data:
